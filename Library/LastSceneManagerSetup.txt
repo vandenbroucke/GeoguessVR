@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/OVR/Scenes/GeoguessVR.unity
+  isLoaded: 1
+  isActive: 1

@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoguessVR", "GeoguessVR.csproj", "{0AB2B2A4-3AC0-4B17-8212-0540D2404F7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoguessVR.Editor", "GeoguessVR.Editor.csproj", "{456B27AF-74BF-8C14-01CD-5280666D7475}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0AB2B2A4-3AC0-4B17-8212-0540D2404F7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AB2B2A4-3AC0-4B17-8212-0540D2404F7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AB2B2A4-3AC0-4B17-8212-0540D2404F7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AB2B2A4-3AC0-4B17-8212-0540D2404F7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{456B27AF-74BF-8C14-01CD-5280666D7475}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{456B27AF-74BF-8C14-01CD-5280666D7475}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{456B27AF-74BF-8C14-01CD-5280666D7475}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{456B27AF-74BF-8C14-01CD-5280666D7475}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
