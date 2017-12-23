@@ -5,7 +5,7 @@ Requirements:
 - Install Oculus Integration through the asset store.
 
 Guide:
-- All of our self written code assets can be found in the root folder /Assets
+- All of our self written code assets can be found in the root folder /Assets with GeoguessVRGame.cs as the core of the project.
 - Our scene environment can be found in /OVR/Scenes/GeoguessVR.unity
 - Double clicking this scene will cause it to load.
 - Pressing play on unity will cause our scene to run and the game to start.
