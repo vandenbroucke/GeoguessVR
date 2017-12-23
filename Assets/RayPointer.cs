@@ -14,6 +14,7 @@ public class RayPointer : MonoBehaviour
     FlatSphereTerrainFactory _globeFactory;
     [SerializeField]
     Transform _globeTransform;
+    //pointer
     [SerializeField]
     public LineRenderer lineRenderer = null;
     [SerializeField]
@@ -27,7 +28,9 @@ public class RayPointer : MonoBehaviour
     float x;
     public bool count;
     public string timeDisp;
+    // store the location of the currently hold in position
     public static Vector2d pinpointLocation = new Vector2d(0, 0);
+    // if true the follow controller can display the 2 pinpoints to see how far off you guessed
     public static bool hasGuessed = false;
     // Use this for initialization
     void Start()
@@ -42,18 +45,25 @@ public class RayPointer : MonoBehaviour
         OVRInput.Update(); // Call before checking the input
 
         if (!hasGuessed && GeoguessVRGame._gameStarted) {
+            //Update positions, hits and draw the linerendere to get the laser pointer effect
             Ray selectionRay = UpdateCastRayIfPossible();
 
+            //Array of hits, will hit on globe objects or already placed pipoints
             RaycastHit[] hits;
             hits = Physics.RaycastAll(selectionRay);
             for (int i = 0; i < hits.Length; i++)
             {
+                //Check if we're holding for a selection, because then we have to hold and store the pinpoint, orwise move the temporary pointpoint around
                 if (OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
                 {
                     RaycastHit hit = hits[i];
+                    //Get the current already placed pinpoint if already done
                     GameObject pinpoint = GameObject.Find("pinpoint");
+
+                    //Check if the hit was on the globe and not on a pinpoint, we can't do on pinpoint because then lat/long position would be wrong.
                     if (hit.collider.gameObject.name != "pinpoint")
                     {
+                        //If we previously had hold and released, now holding again for the first frame
                         if (pinpointLocation.x == 0 && pinpointLocation.y == 0)
                         {
                             Debug.Log("reset");
@@ -63,6 +73,7 @@ public class RayPointer : MonoBehaviour
                         }
                         else
                         {
+                            //Draw the pipoint on the currect location
                             Debug.Log("draw");
 
 
@@ -76,6 +87,7 @@ public class RayPointer : MonoBehaviour
                             Renderer rend = instance.GetComponent<Renderer>();
                             rend.material.color = new Color(255, 255, 255);
 
+                            // Remove the old pinpoint if previously already placed
                             if (pinpoint != null)
                             {
                                 Destroy(pinpoint);
@@ -88,6 +100,9 @@ public class RayPointer : MonoBehaviour
                         lineRenderer.GetComponent<Renderer>().enabled = false;
                         GeoguessVRGame._confirmLocationText.SetActive(true);
                         count = true;
+
+                        //Code for the holding to confirm
+                        //fillImg in the circle that goes to 100% filled, creates a loading effect
                         if (count)
                         {
                             fillImg = GeoguessVRGame._confirmLocationImage.GetComponent<Image>(); ;
@@ -118,9 +133,11 @@ public class RayPointer : MonoBehaviour
                 }
                 else
                 {
+                    //If we're not holding for a guess we reset the pinpointlocation
                     pinpointLocation = new Vector2d(0, 0);
                     x = 0;
                     a = 0;
+                    // hide the guess gui elements
                     GeoguessVRGame._confirmLocationText.SetActive(false);
                     GeoguessVRGame._confirmLocationImage.SetActive(false);
 
@@ -144,6 +161,7 @@ public class RayPointer : MonoBehaviour
                     lineRenderer.SetPosition(1, hit.point);
                     lineRenderer.endWidth = .001f;
 
+                    //Redraw & destroy the last pinpoint
                     if (hit.collider.gameObject.name != "pinpoint")
                     {
                         var instance = GameObject.CreatePrimitive(PrimitiveType.Sphere);
@@ -192,6 +210,7 @@ public class RayPointer : MonoBehaviour
         GeoguessVRGame._scoreText.GetComponent<Text>().text = text;*/
     }
 
+    //Function to calculate the distance between two long/lat positions
     public static double DistanceTo(double lat1, double lon1, double lat2, double lon2, char unit = 'K')
     {
         double rlat1 = Math.PI * lat1 / 180;
