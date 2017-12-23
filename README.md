@@ -1,5 +1,7 @@
 # GeoguessVR
 
+A project by Niels Nauwynck and Steven Vanden Broucke for the course Next generation user interfaces at the Vrije Universiteit Brussel.
+
 Requirements:
 - Install Unity 2017.
 - Install Oculus Integration through the asset store.
