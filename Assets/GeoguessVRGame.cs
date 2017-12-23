@@ -11,6 +11,7 @@ namespace Assets
         public static bool _gameStarted = false;
         static bool tutorialVisible = false;
 
+        //All game objects that we created in the seen are declared here 
         public static GameObject
             _gameLogo,
             _confirmLocationText,
@@ -55,7 +56,10 @@ namespace Assets
 
         void Start()
         {
+            //we attach the game objects to the actual scene object so that we can manipulate them with our code
             initializeGameObjects();
+
+            //change the visibility of GUI elements
             changeScoreVisibility(false);
             changeRoundVisibility(false);
             changeConfirmVisibility(false);
@@ -70,7 +74,9 @@ namespace Assets
         public static void madeGuess(double distanceTo)
         {
             
-
+            //Made and retrieved the actual distance between guess and correct location.
+            //Visualisation of the current score, accuracy and city location and preparing the next round.
+        
             int formattedDistance = (int)distanceTo;
             _textbox_location.GetComponent<Text>().text = currentLocation.Name.ToString();
             _textbox_accuracydistance.GetComponent<Text>().text = formattedDistance.ToString() + " KM";
@@ -95,12 +101,7 @@ namespace Assets
 
             changeConfirmVisibility(false);
             changeRoundVisibility(true);
-
-            //toon totale score nieuwe player
-
             
-
-
 
         }
 
@@ -235,7 +236,8 @@ namespace Assets
         }
 
 
-        // Update is called once per frame
+        // The update method is called for every frame
+        // We check if there has been a planet interaction and update accordingly if we have guessed for a location or not.
         void Update()
         {
             OVRInput.Update(); // Call before checking the input            

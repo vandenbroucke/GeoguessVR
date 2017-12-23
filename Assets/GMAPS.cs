@@ -5,11 +5,17 @@ using UnityEngine;
 
 namespace Assets
 {
+
+    /// <summary>
+    /// Provides an abstract layer for Google Street View service to easily retrieve some locations & images for the game environment.
+    /// </summary>
     public class GMAPS
     {
         private const string API_KEY = "AIzaSyCRbK7pxxqNMDRmAWHHTeAyCdGT3bsOFiI";
         private static System.Random rnd = new System.Random();
         
+
+        //retrieves a singular images depending on its geolocation, resolution, heading, pitch & api key
         public static string getAPIURL(int siz, Location Loc, ViewAngle ViewAng)
         {
             return string.Format("maps.googleapis.com/maps/api/streetview?size={0}x{1}&location={2},{3}&heading={4}&pitch={5}&key={6}",
@@ -24,6 +30,7 @@ namespace Assets
 
      
         
+        //Retrieves a "random" location from our location store
         public static Location GetNewStreetViewCoordinates()
         {
             return Challenges[Random.Range(0,Challenges.Length-1)];
@@ -36,6 +43,7 @@ namespace Assets
             public string Name { get; set; }
         }
       
+        // View angles are used for the retrieval of image data of the google api, for every location we will load 6 angles depending on their heading & pitch in order to generate a full cube.
         public class ViewAngle
         {
             public float Heading { get; set; }
@@ -48,6 +56,7 @@ namespace Assets
             public static ViewAngle DefaultBack = new ViewAngle() { Heading = 180, Pitch = 0 };
         }
 
+        //Random location challenges that are currently hardcoded, but can be upgraded to an external service
         private static Location[] Challenges = new Location[] {
             new Location(){ Lat=51.2086317f,    Long=3.2242202f,    Name="BRUGES"},
             new Location(){ Lat=51.2184941f,    Long=2.9223244f,    Name="OSTEND" },
